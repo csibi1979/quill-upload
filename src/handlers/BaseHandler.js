@@ -93,7 +93,11 @@ class BaseHandler {
     if (!_progress) return;
     let _lastStyleSheet =
       document.styleSheets[document.styleSheets.length - 1];
-    if (!_lastStyleSheet.cssRules) {
+    let cssRules;
+    try {
+      cssRules = _lastStyleSheet.cssRules;
+    } catch {}
+    if (!cssRules) {
       let lastStyle = document.createElement("style");
       lastStyle.type = "text/css";
       document.getElementsByTagName("head")[0].appendChild(lastStyle);
