@@ -101,7 +101,7 @@ class BaseHandler {
       let lastStyle = document.createElement("style");
       lastStyle.type = "text/css";
       document.getElementsByTagName("head")[0].appendChild(lastStyle);
-      _lastStyleSheet = lastStyle;
+      _lastStyleSheet = document.styleSheets[document.styleSheets.length - 1];
     }
 
     if (action === "start") {
