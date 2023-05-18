@@ -91,8 +91,14 @@ class BaseHandler {
 
     const _progress = _children[0];
     if (!_progress) return;
-    const _lastStyleSheet =
+    let _lastStyleSheet =
       document.styleSheets[document.styleSheets.length - 1];
+    if (!_lastStyleSheet.cssRules) {
+      let lastStyle = document.createElement("style");
+      lastStyle.type = "text/css";
+      document.getElementsByTagName("head")[0].appendChild(lastStyle);
+      _lastStyleSheet = lastStyle;
+    }
 
     if (action === "start") {
       _lastStyleSheet.insertRule(_rule, _lastStyleSheet.cssRules.length);
