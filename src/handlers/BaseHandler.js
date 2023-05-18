@@ -66,12 +66,18 @@ class BaseHandler {
     const _keyframes = [];
 
     for (var i = 0; i < ss.length; ++i) {
-      for (var j = 0; j < ss[i].cssRules.length; ++j) {
-        if (
-          ss[i].cssRules[j].type == window.CSSRule.WEBKIT_KEYFRAMES_RULE &&
-          ss[i].cssRules[j].name.includes(rule)
-        ) {
-          _keyframes.push(ss[i].cssRules[j]);
+      let cssRules;
+      try {
+        cssRules = ss[i].cssRules;
+      } catch {};
+      if (cssRules) {
+        for (var j = 0; j < ss[i].cssRules.length; ++j) {
+          if (
+              ss[i].cssRules[j].type == window.CSSRule.WEBKIT_KEYFRAMES_RULE &&
+              ss[i].cssRules[j].name.includes(rule)
+          ) {
+            _keyframes.push(ss[i].cssRules[j]);
+          }
         }
       }
     }
